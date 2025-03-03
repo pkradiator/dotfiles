@@ -212,3 +212,28 @@
 
 (use-package yaml-mode
   :ensure t)
+
+(use-package web-mode
+  :ensure t
+  :mode
+  (("\\.phtml\\'" . web-mode)
+   ("\\.php\\'" . web-mode)
+   ("\\.tpl\\'" . web-mode)
+   ("\\.[agj]sp\\'" . web-mode)
+   ("\\.as[cp]x\\'" . web-mode)
+   ("\\.erb\\'" . web-mode)
+   ("\\.mustache\\'" . web-mode)
+   ("\\.djhtml\\'" . web-mode)
+   ("\\.jsx\\'" . web-mode)
+   ("\\.html\\'" . web-mode)
+   ("\\.js\\'" . web-mode)
+   ("\\.css\\'" . web-mode)
+   ("\\.tsx\\'" . web-mode))
+  :config
+  (setq web-mode-markup-indent-offset 2
+	web-mode-code-indent-offset 2
+	web-mode-css-indent-offset 2))
+
+(use-package magit
+  :ensure t
+  :bind ("C-x g" . magit-status))
