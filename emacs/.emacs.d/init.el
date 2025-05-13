@@ -371,20 +371,24 @@
   :hook ((dired-mode . diff-hl-dired-mode))
   :bind
   (:map diff-hl-command-map
-   ("n" . diff-hl-next-hunk)
-   ("p" . diff-hl-previous-hunk)
-   ("[" . nil)
-   ("]" . nil)
-   ("DEL"   . diff-hl-revert-hunk)
-   ("<delete>" . diff-hl-revert-hunk)
-   ("SPC" . diff-hl-mark-hunk)
-   :map vc-prefix-map
-   ("n" . diff-hl-next-hunk)
-   ("p" . diff-hl-previous-hunk)
-   ("s" . diff-hl-stage-dwim)
-   ("DEL"   . diff-hl-revert-hunk)
-   ("<delete>" . diff-hl-revert-hunk)
-   ("SPC" . diff-hl-mark-hunk))
+	("n" . diff-hl-next-hunk)
+	("p" . diff-hl-previous-hunk)
+	("[" . nil)
+	("]" . nil)
+	("DEL"   . diff-hl-revert-hunk)
+	("<delete>" . diff-hl-revert-hunk)
+	("SPC" . diff-hl-mark-hunk)
+	("," . diff-hl-set-reference-rev)
+	("." . diff-hl-reset-reference-rev)
+	:map vc-prefix-map
+	("n" . diff-hl-next-hunk)
+	("p" . diff-hl-previous-hunk)
+	("s" . diff-hl-stage-dwim)
+	("DEL"   . diff-hl-revert-hunk)
+	("<delete>" . diff-hl-revert-hunk)
+	("SPC" . diff-hl-mark-hunk)
+	("," . diff-hl-set-reference-rev)
+	("." . diff-hl-reset-reference-rev))
   :config
   ;; Highlight on-the-fly
   (diff-hl-flydiff-mode 1)
@@ -392,5 +396,5 @@
   (put 'diff-hl-inline-popup-hide
        'repeat-map 'diff-hl-command-map)
   (with-eval-after-load 'magit
-      (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)))
+    (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)))
 
