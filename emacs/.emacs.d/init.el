@@ -404,3 +404,7 @@
   (with-eval-after-load 'magit
     (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)))
 
+(use-package repeat
+  :ensure nil
+  :defer t
+  :hook (after-init . repeat-mode))
