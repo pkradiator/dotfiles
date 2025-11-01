@@ -1,0 +1,31 @@
+* Blogs and YT                                                       :elfeed:
+** Blogs                                                             :blogs:
+*** Emacs                                                           :emacs:
+**** entry-title: \(emacs\|org-mode\)
+**** https://karthinks.com/index.xml                                 :dev:
+**** http://nullprogram.com/feed/                                    :dev:
+**** https://www.greghendershott.com/feeds/all.rss.xml               :dev:
+*** Math                                                             :math:
+**** https://math.andrej.com/feed.xml
+*** Dev                                                               :dev:
+**** https://web.navan.dev/feed.rss
+**** https://pointersgonewild.com/feed.xml
+**** https://eugene-andrienko.com/en/feed.xml
+**** https://scripter.co/atom.xml
+**** https://justanotherelectronicsblog.com/?feed=rss2       :electronics:
+**** https://lexi-lambda.github.io/feeds/all.rss.xml
+**** https://bernsteinbear.com/feed.xml                        :compilers:
+**** https://antoniosbarotsis.github.io/index.xml
+**** https://baez.link/feed/
+**** Game                                                       :game:dev:
+***** https://caseymuratori.com/blog_atom.rss
+*** entry-title: \(linux\|linus\|ubuntu\|kde\|gnome\)               :linux:
+*** Hardware                                                     :hardware:
+**** https://www.bunniestudios.com/blog/feed/
+** Youtube                                                         :youtube:
+*** Math                                                             :math:
+*** Dev                                                               :dev:
+*** Tinkering                                                   :tinkering:
+**** https://www.youtube.com/feeds/videos.xml?channel_id=UCS54EwvnjCbd78lyRTFmcjw
+Ex-IT guy
+*** Physics                                                       :physics:

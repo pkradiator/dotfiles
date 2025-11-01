@@ -352,6 +352,12 @@
 	  "https://karthinks.com/index.xml"
 	  "https://pointersgonewild.com/feed.xml"
 	  )))
+(use-package elfeed-org
+  :ensure t
+  :init
+  (setq rmh-elfeed-org-files (list "~/.emacs.d/elfeed.org"))
+  :config
+  (elfeed-org))
 
 (use-package ibuffer
   :ensure nil
