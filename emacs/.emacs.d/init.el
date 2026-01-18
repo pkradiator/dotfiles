@@ -1,13 +1,6 @@
 ;;; Packages I have Installed
-;; auctex
-;; cdlatex
 ;; eat
-;; exec-path-from-shell
 ;; speed-type (installed manually)
-;; yaml-mode
-;; ace-window
-;; pdf-tools
-;; Increase garbage-collection threshold
 
 
 (setq gc-cons-threshold (* 50 1000 1000))
@@ -22,7 +15,7 @@
            gcs-done))
 
 (add-hook 'emacs-startup-hook #'pkd/display-startup-time)
-(load-theme 'modus-operandi-tinted)
+(load-theme 'modus-vivendi-tinted)
 
 ;; if emacs version is less than 27, load the autoloads of files in load-path
 ;; is done automatically after version 27
@@ -46,6 +39,12 @@
 ;; Full screen on startup
 (toggle-frame-fullscreen)
 
+(use-package which-key
+  :ensure t
+  :demand t
+  :config
+  (which-key-mode))
+
 ;; On Mac keyboard Command -> Meta
 (setq mac-command-modifier 'meta)
 ;;(setq mac-option-modifier 'control)
@@ -66,11 +65,11 @@
 (column-number-mode)
 
 ;;Use icomplete
-(use-package icomplete
-  :ensure nil
-  :demand t
-  :config
-  (fido-mode t))
+;; (use-package icomplete
+;;   :ensure nil
+;;   :demand t
+;;   :config
+;;   (fido-mode t))
 
 
 ;; Display line numbers in the left margin, as a general rule,
@@ -98,9 +97,9 @@
 ;; Load the theme of your choice:
 ;;(load-theme 'modus-operandi)
 
-;; Auctex
 (use-package auctex
   :ensure t)
+
 ;; Increase the quality of Docview
 (setq doc-view-resolution 300)
 
@@ -125,7 +124,11 @@
   (modify-syntax-entry ?< ".")
   (modify-syntax-entry ?> "."))
 
-(add-hook 'org-mode-hook #'turn-on-org-cdlatex)
+(use-package cdlatex
+  :ensure t
+  :hook ((org-mode . turn-on-org-cdlatex)
+	 (LaTeX-mode . turn-on-cdlatex)))
+
 (use-package org
   :hook ((org-mode . pkd/org-mode-setup)
 	 (org-mode . turn-on-org-cdlatex))
@@ -175,7 +178,6 @@
 (use-package eat
   :hook (eshell-load . eat-eshell-mode))
 
-;;; For package ace-window
 (use-package ace-window
   :ensure t
   :bind ("C-x o" . 'ace-window)
@@ -185,7 +187,7 @@
 
 ;;Start a competitive programming session
 (defun start-comp-prog-session ()
-  "Starts a competitive programming session"
+  "Start a competitive programming session."
   (interactive)
   (if (> (window-width) 130)
       (progn
@@ -344,7 +346,7 @@
   (setq elfeed-db-directory (expand-file-name "elfeed" user-emacs-directory))
   (setq elfeed-feeds
 	'(;; Blogs
-	  "http://nullprogram.com/feed/"
+	  ("http://nullprogram.com/feed/" Programming CS)
 	  "https://lexi-lambda.github.io/feeds/all.rss.xml"
 	  "https://justanotherelectronicsblog.com/?feed=rss2"
 	  "https://scripter.co/atom.xml"
@@ -414,3 +416,25 @@
   :ensure nil
   :defer t
   :hook (after-init . repeat-mode))
+
+
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
+(use-package lsp-mode
+  :ensure t
+  :init
+  (setq lsp-keymap-prefix "C-,")
+  :hook ((lsp-mode . lsp-diagnostics-mode)
+         (lsp-mode . lsp-enable-which-key-integration)
+         ((tsx-ts-mode
+           typescript-ts-mode
+           js-ts-mode) . lsp-deferred))  
+  :commands lsp)
+
+(use-package lsp-ui :commands lsp-ui-mode)
+
+(use-package speed-type
+  :ensure t)
+
