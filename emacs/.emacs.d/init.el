@@ -438,3 +438,5 @@
 (use-package speed-type
   :ensure t)
 
+(use-package restclient
+  :ensure t)
