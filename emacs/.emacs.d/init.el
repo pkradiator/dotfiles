@@ -29,7 +29,8 @@
 
 ;; Garbage produced by Custom in a separate file
 (setq custom-file "~/.emacs.d/emacs-custom.el")
-(load custom-file)
+(if (file-readable-p custom-file)
+    (load custom-file))
 
 ;; Add melpa
 (add-to-list 'package-archives 
