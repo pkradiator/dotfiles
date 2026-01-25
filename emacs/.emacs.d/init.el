@@ -3,6 +3,8 @@
 ;; speed-type (installed manually)
 
 
+(require 'package)
+
 (setq gc-cons-threshold (* 50 1000 1000))
 
 
@@ -56,7 +58,16 @@
 (setq save-interprogram-paste-before-kill t)
 
 ;; Menu Bar is actually useful on macos
-;; (menu-bar-mode -1)
+(cond
+ ((eq system-type 'windows-nt)
+       (menu-bar-mode -1)
+       (set-message-beep 'silent)
+       (add-to-list 'exec-path "c:/Program Files/Git/usr/bin")
+       (setenv "PATH" "c:/Program Files/Git/usr/bin"))
+ ((eq system-type 'gnu/linux)
+  (menu-bar-mode -1)
+  (setq ring-bell-function 'ignore)))
+
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (tooltip-mode -1)
@@ -116,7 +127,7 @@
   :ensure t
   :defer nil
   :config
-  (exec-path-from-shell-initialize))
+  (when (eq system-type 'darwin)(exec-path-from-shell-initialize)))
 
 ;;; Org Mode:-
 (defun pkd/org-mode-setup ()
@@ -426,18 +437,29 @@
 (use-package lsp-mode
   :ensure t
   :init
-  (setq lsp-keymap-prefix "C-,")
+  (setq lsp-keymap-prefix "C-.")
   :hook ((lsp-mode . lsp-diagnostics-mode)
          (lsp-mode . lsp-enable-which-key-integration)
          ((tsx-ts-mode
            typescript-ts-mode
-           js-ts-mode) . lsp-deferred))  
+           js-ts-mode
+	   java-ts-mode) . lsp-deferred))  
   :commands lsp)
 
-(use-package lsp-ui :commands lsp-ui-mode)
+(use-package lsp-ui
+  :ensure t
+  :commands lsp-ui-mode)
+(use-package lsp-java
+  :ensure t)
 
 (use-package speed-type
   :ensure t)
 
 (use-package restclient
   :ensure t)
+
+;; Even describe C functions
+(setq source-directory (expand-file-name "~/kp7/emacs/"))
+(setq find-function-C-source-directory (expand-file-name "~/kp7/emacs/src/"))
+
+(set-face-attribute 'default nil :family "Courier New" :height 118 :weight 'normal :width 'normal)
