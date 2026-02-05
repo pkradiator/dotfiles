@@ -1,5 +1,4 @@
 ;;; Packages I have Installed
-;; eat
 ;; speed-type (installed manually)
 
 
@@ -186,9 +185,8 @@
 ;;       (overlay-put ov 'line-prefix `(space :align-to (- center (0.5 . ,disp)))))))
 ;;  (advice-add 'org--make-preview-overlay :after 'org-justify-fragment-overlay)
 
-;;; For package eat
-(use-package eat
-  :hook (eshell-load . eat-eshell-mode))
+(use-package vterm
+  :ensure t)
 
 (use-package ace-window
   :ensure t
@@ -214,7 +212,7 @@
 	(split-window-below)
 	(find-file "~/kp7/Competitive_Programming/cpp_env/output.txt")
 	(other-window 1)
-	(eat))
+	(vterm))
     (progn
       (delete-other-windows)
       (find-file "~/kp7/Competitive_Programming/cpp_env/sol.cpp")
@@ -222,7 +220,7 @@
       (enlarge-window 20)
       (other-window 1)
       (find-file "~/kp7/Competitive_Programming/cpp_env/input.txt")
-      (eat)
+      (vterm)
       (other-window 1))))
 (keymap-global-set "C-x c p" 'start-comp-prog-session)
 
