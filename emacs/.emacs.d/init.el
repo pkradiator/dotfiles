@@ -40,6 +40,7 @@
 
 ;; Full screen on startup
 (toggle-frame-fullscreen)
+(add-to-list 'after-make-frame-functions 'toggle-frame-fullscreen)
 
 (use-package which-key
   :ensure t
@@ -61,6 +62,7 @@
  ((eq system-type 'windows-nt)
        (menu-bar-mode -1)
        (set-message-beep 'silent)
+       (setq package-gnupghome-dir "/c/Users/miniOrange/.emacs.d/elpa/gnupg/")
        (add-to-list 'exec-path "c:/Program Files/Git/usr/bin")
        (setenv "PATH" "c:/Program Files/Git/usr/bin"))
  ((eq system-type 'gnu/linux)
@@ -151,6 +153,7 @@
   (setq org-directory "~/kp7/org")
   (setq org-M-RET-may-split-line '((default . nil)))
   (setq org-insert-heading-respect-content t)
+  (define-key org-mode-map (kbd "C-c C-r") verb-command-map)
   ;; Org Capture templates
   (setq org-capture-templates
 	'(("t" "Todo" entry (file+headline "~/kp7/org/gtd.org" "Tasks")
@@ -451,13 +454,20 @@
   :ensure t)
 
 (use-package speed-type
-  :ensure t)
+  :ensure t
+  :init
+  (setq speed-type-wordlist-transform 'downcase))
 
-(use-package restclient
+(use-package verb
   :ensure t)
 
 ;; Even describe C functions
 (setq source-directory (expand-file-name "~/kp7/emacs/"))
 (setq find-function-C-source-directory (expand-file-name "~/kp7/emacs/src/"))
 
-(set-face-attribute 'default nil :family "Courier New" :height 118 :weight 'normal :width 'normal)
+(set-face-attribute 'default nil :family "Courier New" :height 120 :weight 'normal :width 'normal)
+
+(use-package erc
+  :ensure nil
+  :config
+  (setopt erc-user-full-name "Priyanshu Kalal"))
