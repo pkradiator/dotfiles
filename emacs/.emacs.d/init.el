@@ -40,7 +40,8 @@
 
 ;; Full screen on startup
 (toggle-frame-fullscreen)
-(add-to-list 'after-make-frame-functions 'toggle-frame-fullscreen)
+(when (eq system-type 'windows-nt)
+  (add-to-list 'after-make-frame-functions 'toggle-frame-fullscreen))
 
 (use-package which-key
   :ensure t
@@ -77,12 +78,14 @@
 ;; Show column number on the modeline.
 (column-number-mode)
 
-;;Use icomplete
-;; (use-package icomplete
-;;   :ensure nil
-;;   :demand t
-;;   :config
-;;   (fido-mode t))
+(use-package icomplete
+  :ensure nil
+  :demand t
+  :config
+  (icomplete-vertical-mode t)
+  (setq icomplete-show-matches-on-no-input t)
+  (define-key icomplete-minibuffer-map (kbd "<tab>") 'icomplete-force-complete)
+  (define-key icomplete-minibuffer-map (kbd "C-j") 'minibuffer-complete))
 
 
 ;; Display line numbers in the left margin, as a general rule,
