@@ -133,6 +133,24 @@
   :config
   (when (eq system-type 'darwin)(exec-path-from-shell-initialize)))
 
+;;Annoying windows solved
+(use-package popper
+  :ensure t ; or :straight t
+  :bind (("C-`"   . popper-toggle)
+         ("M-`"   . popper-cycle)
+         ("C-M-`" . popper-toggle-type))
+  :init
+  (setq popper-reference-buffers
+        '("\\*Messages\\*"
+          "Output\\*$"
+          "\\*Async Shell Command\\*"
+          help-mode
+          compilation-mode
+	  occur-mode
+	  grep-mode))
+  (popper-mode +1)
+  (popper-echo-mode +1))
+
 ;;; Org Mode:-
 (defun pkd/org-mode-setup ()
   (org-indent-mode)
