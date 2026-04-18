@@ -54,7 +54,7 @@
 ;;(setq mac-option-modifier 'control)
 
 ;; I prefer spaces over tabs
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 ;;Add content of clipboard(things you copy outside emacs) to kill ring (emacs clipboard)
 (setq save-interprogram-paste-before-kill t)
 
