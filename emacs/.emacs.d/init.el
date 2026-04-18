@@ -84,8 +84,16 @@
   :config
   (icomplete-vertical-mode t)
   (setq icomplete-show-matches-on-no-input t)
+  (setq completion-styles '(substring initials flex))
   (define-key icomplete-minibuffer-map (kbd "<tab>") 'icomplete-force-complete)
-  (define-key icomplete-minibuffer-map (kbd "C-j") 'minibuffer-complete))
+  (define-key icomplete-minibuffer-map (kbd "C-j") 'minibuffer-complete)
+  (define-key icomplete-minibuffer-map (kbd "<S-return>") 'minibuffer-complete-and-exit)
+  (define-key icomplete-minibuffer-map (kbd "RET") 'icomplete-force-complete-and-exit))
+
+(use-package marginalia
+  :ensure t
+  :init
+  (marginalia-mode))
 
 
 ;; Display line numbers in the left margin, as a general rule,
