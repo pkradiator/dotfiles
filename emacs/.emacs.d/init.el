@@ -515,3 +515,47 @@
   :ensure nil
   :config
   (setopt erc-user-full-name "Priyanshu Kalal"))
+
+(use-package org-roam
+  :ensure t
+  :init
+  (setq org-roam-directory (file-truename "~/kp7/org/org-roam"))
+  :config
+  (org-roam-db-autosync-mode)
+  :bind (("C-x n f" . org-roam-node-find)
+	 ("C-x n i" . org-roam-node-insert)
+	 ("C-x n y" . org-id-get-create)
+	 ("C-x n c" . org-roam-capture)
+         ("C-x n l" . org-roam-buffer-toggle)))
+
+(use-package devdocs
+  :ensure t
+  :bind ("C-h D" . devdocs-lookup))
+
+(use-package compile
+  :ensure nil
+  :bind (("C-x c c" . compile)
+         ("C-x c r" . recompile)))
+
+(use-package easy-hugo
+  :ensure t
+  :init
+  (setq easy-hugo-basedir "~/kp7/mySite/"))
+
+(use-package cuda-mode
+  :ensure t)
+
+(with-eval-after-load 'project
+  (defun project-find-regexp-with-unique-buffer (orig-fun &rest args)
+    "An advice function that gives project-find-regexp a unique buffer name"
+    (require 'xref)
+    (let ((xref-buffer-name (format "%s %s" xref-buffer-name (car args))))
+      (apply orig-fun args)))
+
+  (advice-add 'project-find-regexp :around
+              #'project-find-regexp-with-unique-buffer))
+
+
+(provide 'init)
+
+;;; init.el ends here
