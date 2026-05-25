@@ -78,6 +78,21 @@
 ;; Show column number on the modeline.
 (column-number-mode)
 
+(defun my/smart-next-line (&optional arg try-vscroll)
+  "Move down. Uses logical lines if a prefix ARG is provided, else visual."
+  (interactive "^p\np")
+  (let ((line-move-visual (if current-prefix-arg nil line-move-visual)))
+    (next-line arg try-vscroll)))
+
+(defun my/smart-previous-line (&optional arg try-vscroll)
+  "Move up. Uses logical lines if a prefix ARG is provided, else visual."
+  (interactive "^p\np")
+  (let ((line-move-visual (if current-prefix-arg nil line-move-visual)))
+    (previous-line arg try-vscroll)))
+
+(global-set-key (kbd "C-n") 'my/smart-next-line)
+(global-set-key (kbd "C-p") 'my/smart-previous-line)
+
 (use-package icomplete
   :ensure nil
   :demand t
