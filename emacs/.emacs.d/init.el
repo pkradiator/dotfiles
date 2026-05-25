@@ -201,7 +201,7 @@
   ;; Org Capture templates
   (setq org-capture-templates
 	'(("t" "Todo" entry (file+headline "~/kp7/org/gtd.org" "Tasks")
-	   "* TODO %?\n  %i\n")
+	   "* TODO %?\n %U\n %i\n")
 	  ("e" "Events" entry(file+headline "~/kp7/org/gtd.org" "Events")
 	   "* %?\n %T\n %i\n")))
   ;; Increase scale from 1.0 to 1.4
