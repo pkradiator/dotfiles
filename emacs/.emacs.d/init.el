@@ -102,7 +102,7 @@
   (setq completion-styles '(substring initials flex))
   (define-key icomplete-minibuffer-map (kbd "<tab>") 'icomplete-force-complete)
   (define-key icomplete-minibuffer-map (kbd "C-j") 'minibuffer-complete)
-  (define-key icomplete-minibuffer-map (kbd "<S-return>") 'minibuffer-complete-and-exit)
+  (define-key icomplete-minibuffer-map (kbd "<S-return>") 'exit-minibuffer)
   (define-key icomplete-minibuffer-map (kbd "RET") 'icomplete-force-complete-and-exit))
 
 (use-package marginalia
