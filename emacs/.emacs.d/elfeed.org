@@ -20,6 +20,7 @@
 **** https://antoniosbarotsis.github.io/index.xml
 **** https://baez.link/feed/
 **** https://dustri.org/b/rss.xml                                   :math:
+**** https://www.lei.chat/posts/index.xml                  :gpu:compilers:
 **** Game                                                       :game:dev:
 ***** https://caseymuratori.com/blog_atom.rss
 *** Hacking                                              :cybersec:hacking:
