@@ -22,6 +22,7 @@
 **** https://dustri.org/b/rss.xml                                   :math:
 **** https://www.lei.chat/posts/index.xml                  :gpu:compilers:
 **** https://blog.ezyang.com/feed.xml                      :torch:llm:
+**** https://chsasank.com/feed.xml                               :special:
 **** Game                                                       :game:dev:
 ***** https://caseymuratori.com/blog_atom.rss
 *** Hacking                                              :cybersec:hacking:
