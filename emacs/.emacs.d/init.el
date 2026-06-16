@@ -93,6 +93,11 @@
 (global-set-key (kbd "C-n") 'my/smart-next-line)
 (global-set-key (kbd "C-p") 'my/smart-previous-line)
 
+(use-package change-inner
+  :ensure t
+  :bind (("C-x c i" . change-inner)
+         ("C-x c o" . change-outer)))
+
 (use-package icomplete
   :ensure nil
   :demand t
@@ -200,10 +205,56 @@
   (define-key org-mode-map (kbd "C-c C-r") verb-command-map)
   ;; Org Capture templates
   (setq org-capture-templates
-	'(("t" "Todo" entry (file+headline "~/kp7/org/gtd.org" "Tasks")
-	   "* TODO %?\n %U\n %i\n")
-	  ("e" "Events" entry(file+headline "~/kp7/org/gtd.org" "Events")
-	   "* %?\n %T\n %i\n")))
+        '(;; Frictionless drop — when you're not sure where it belongs
+          ("n" "Inbox" entry (file+headline "~/kp7/org/life.org" "Inbox")
+           "* %?\n %U\n %i\n")
+
+          ;; Tasks
+          ("t" "Todo" entry (file+headline "~/kp7/org/life.org" "Tasks")
+           "* TODO %?\n %U\n %i\n")
+
+          ;; Events
+          ("e" "Event" entry (file+headline "~/kp7/org/life.org" "Events")
+           "* %?\n %T\n %i\n" :tag "event")
+
+          ;; Reading / Links
+          ("a" "Article/Link" entry (file+headline "~/kp7/org/life.org" "Reading")
+           "* TODO Read: %?\n :PROPERTIES:\n :URL: %x\n :END:\n %U\n" :tag "read")
+
+          ;; Ideas to explore
+          ("i" "Idea" entry (file+headline "~/kp7/org/life.org" "Ideas")
+           "* %?\n %U\n %i\n" :tag "idea")
+
+          ;; Reflections / Essays
+          ("d" "Diary" entry (file+headline "~/kp7/org/life.org" "Diary")
+           "* On %?\n [%<%Y-%m-%d %a>]\n\n" :tag "note")
+
+          ;; Resolutions — goals or habits
+          ("r" "Resolution" entry (file+headline "~/kp7/org/life.org" "Resolutions")
+           "* TODO %?\n %U\n %i\n" :tag "resolution")))
+  (setq org-agenda-files '("~/kp7/org/life.org"))
+
+  (setq org-agenda-custom-commands
+  '(("w" "Weekend Review"
+     ((tags "inbox"
+            ((org-agenda-overriding-header "📥 Inbox — triage first")))
+
+      (tags-todo "+TIMESTAMP<\"<-21d>\""
+                 ((org-agenda-overriding-header "⚠️  Stale — decide or delete")))
+
+      (tags-todo "read"
+                 ((org-agenda-overriding-header "📚 Reading Queue")))
+
+      (tags "idea"
+            ((org-agenda-overriding-header "💡 Ideas")))
+
+      (tags "resolution"
+            ((org-agenda-overriding-header "🎯 Resolutions")))
+
+      (todo "TODO"
+            ((org-agenda-overriding-header "📋 All Tasks")
+             (org-agenda-files '("~/kp7/org/life.org"))))))))
+  
   ;; Increase scale from 1.0 to 1.4
   (setq org-format-latex-options
 	'(:foreground default :background default :scale 1.4 :html-foreground "Black"
@@ -429,7 +480,9 @@
 (use-package markdown-mode
   :ensure t
   :mode ("README\\.md\\'" . gfm-mode)
-  :init (setq markdown-command "multimarkdown")
+  :init
+  (setq markdown-command "multimarkdown"
+        markdown-fontify-code-blocks-natively t)
   :bind (:map markdown-mode-map
          ("C-c C-e" . markdown-do)))
 
@@ -544,6 +597,18 @@
 
 (use-package cuda-mode
   :ensure t)
+
+(use-package gptel
+  :ensure t
+  :bind (("C-x a RET" . gptel-send))
+  :config
+  (setq auth-sources '("~/.authinfo.gpg"))
+  (setq gptel-backend (gptel-make-gemini "Gemini"
+                        :key (lambda ()
+                               (auth-source-pick-first-password
+                                :host "api.generativeai.google.com"
+                                :user "apikey"))
+                        :stream t)))
 
 (with-eval-after-load 'project
   (defun project-find-regexp-with-unique-buffer (orig-fun &rest args)
