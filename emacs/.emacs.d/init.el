@@ -63,9 +63,10 @@
  ((eq system-type 'windows-nt)
        (menu-bar-mode -1)
        (set-message-beep 'silent)
-       (setq package-gnupghome-dir "/c/Users/miniOrange/.emacs.d/elpa/gnupg/")
-       (add-to-list 'exec-path "c:/Program Files/Git/usr/bin")
-       (setenv "PATH" "c:/Program Files/Git/usr/bin"))
+       ;setq package-gnupghome-dir "/c/Users/miniOrange/.emacs.d/elpa/gnupg/")
+       ;(add-to-list 'exec-path "c:/Program Files/Git/usr/bin")
+       ;(setenv "PATH" "c:/Program Files/Git/usr/bin")
+)
  ((eq system-type 'gnu/linux)
   (menu-bar-mode -1)
   (setq ring-bell-function 'ignore)))
@@ -77,6 +78,19 @@
 
 ;; Show column number on the modeline.
 (column-number-mode)
+
+(use-package winner
+  :ensure nil
+  :init
+  (winner-mode 1)
+  (repeat-mode 1)
+  :bind (("C-x w p" . winner-undo)
+         ("C-x w n" . winner-redo))
+  :bind
+  (:map winner-repeat-map
+        ("p" . winner-undo)
+        ("n" . winner-redo)))
+
 
 (defun my/smart-next-line (&optional arg try-vscroll)
   "Move down. Uses logical lines if a prefix ARG is provided, else visual."
@@ -105,6 +119,8 @@
   (icomplete-vertical-mode t)
   (setq icomplete-show-matches-on-no-input t)
   (setq completion-styles '(substring initials flex))
+  (setq completion-ignore-case t)
+  (setq read-file-name-completion-ignore-case t)
   (define-key icomplete-minibuffer-map (kbd "<tab>") 'icomplete-force-complete)
   (define-key icomplete-minibuffer-map (kbd "C-j") 'minibuffer-complete)
   (define-key icomplete-minibuffer-map (kbd "<S-return>") 'exit-minibuffer)
@@ -283,15 +299,24 @@
 ;;       (overlay-put ov 'line-prefix `(space :align-to (- center (0.5 . ,disp)))))))
 ;;  (advice-add 'org--make-preview-overlay :after 'org-justify-fragment-overlay)
 
-(use-package vterm
-  :ensure t)
+;; (use-package vterm
+;;   :ensure t)
+
+(use-package ghostel
+  :ensure t
+  :config
+  (add-to-list 'project-switch-commands '(ghostel-project "Ghostel" "s") t)
+  :bind
+  (:map project-prefix-map
+        ("s" . ghostel-project)
+        ("S" . ghostel-project-list-buffers)))
 
 (use-package ace-window
   :ensure t
   :bind ("C-x o" . 'ace-window)
   :config
   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
-  (setq aw-scope 'frame))
+  (setq aw-scope 'visible))
 
 ;;Start a competitive programming session
 (defun start-comp-prog-session ()
@@ -338,7 +363,7 @@
   :ensure t
   :commands pdf-view-mode
   :mode ("\\.pdf\\'" . pdf-view-mode)
-  :hook ((pdf-view-mode . (lambda () (display-line-numbers-mode -1) (auto-revert-mode))))
+  :hook ((pdf-view-mode . (lambda () (display-line-numbers-mode -1) (auto-revert-mode) (pdf-view-roll-minor-mode))))
   :config
   (pdf-loader-install))
 
@@ -369,7 +394,8 @@
 
 (use-package magit
   :ensure t
-  :bind ("C-x g g" . magit-status))
+  :bind (("C-x g" . nil)
+         ("C-x g g" . magit-status)))
 
 (use-package dired
   :ensure nil
@@ -528,9 +554,9 @@
   :hook (after-init . repeat-mode))
 
 
-(use-package flycheck
-  :ensure t
-  :init (global-flycheck-mode))
+;; (use-package flycheck
+;;   :ensure t
+;;   :init (global-flycheck-mode))
 
 (use-package lsp-mode
   :ensure t
@@ -541,7 +567,8 @@
          ((tsx-ts-mode
            typescript-ts-mode
            js-ts-mode
-	   java-ts-mode) . lsp-deferred))  
+	   java-ts-mode
+           python-mode) . lsp-deferred))  
   :commands lsp)
 
 (use-package lsp-ui
