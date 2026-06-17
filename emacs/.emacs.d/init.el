@@ -75,23 +75,34 @@
 (tool-bar-mode -1)
 (tooltip-mode -1)
 (set-fringe-mode 10)
+(setq tab-bar-tab-hints t)
 
 ;; Show column number on the modeline.
 (column-number-mode)
 
-(use-package winner
+(use-package tab-bar
   :ensure nil
   :init
-  (setq winner-dont-bind-my-keys t)
-  (winner-mode 1)
-  (repeat-mode 1)
-  :bind (("C-x w p" . winner-undo)
-         ("C-x w n" . winner-redo))
-  :bind
-  (:map winner-repeat-map
-        ("p" . winner-undo)
-        ("n" . winner-redo)))
+  (setq tab-bar-show 1)
+  :config
+  (tab-bar-mode 1)
+  (tab-bar-history-mode 1)
 
+  ;; Define the repeat map for tab history navigation
+  (defvar tab-bar-history-repeat-map
+    (let ((map (make-sparse-keymap)))
+      (define-key map (kbd "p") 'tab-bar-history-back)
+      (define-key map (kbd "n") 'tab-bar-history-forward)
+      map))
+
+  ;; Associate the commands with the repeat map
+  (put 'tab-bar-history-back 'repeat-map 'tab-bar-history-repeat-map)
+  (put 'tab-bar-history-forward 'repeat-map 'tab-bar-history-repeat-map)
+
+  :bind
+  (:map tab-bar-history-mode-map
+        ("C-x w p" . tab-bar-history-back)
+        ("C-x w n" . tab-bar-history-forward)))
 
 (defun my/smart-next-line (&optional arg try-vscroll)
   "Move down. Uses logical lines if a prefix ARG is provided, else visual."
@@ -111,7 +122,7 @@
 (use-package change-inner
   :ensure t
   :bind (("C-x c i" . change-inner)
-         ("C-x c o" . change-outer)))
+         ("C-x c a" . change-outer)))
 
 (use-package icomplete
   :ensure nil
