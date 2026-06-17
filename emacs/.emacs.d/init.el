@@ -63,7 +63,7 @@
  ((eq system-type 'windows-nt)
        (menu-bar-mode -1)
        (set-message-beep 'silent)
-       ;setq package-gnupghome-dir "/c/Users/miniOrange/.emacs.d/elpa/gnupg/")
+       ;setq package-gnupghome-dir "/c/Users/userName/.emacs.d/elpa/gnupg/")
        ;(add-to-list 'exec-path "c:/Program Files/Git/usr/bin")
        ;(setenv "PATH" "c:/Program Files/Git/usr/bin")
 )
@@ -82,6 +82,7 @@
 (use-package winner
   :ensure nil
   :init
+  (setq winner-dont-bind-my-keys t)
   (winner-mode 1)
   (repeat-mode 1)
   :bind (("C-x w p" . winner-undo)
@@ -580,7 +581,10 @@
 (use-package speed-type
   :ensure t
   :init
-  (setq speed-type-wordlist-transform 'downcase))
+  (setq speed-type-wordlist-transform 'downcase)
+  :bind (("C-x g s" . (lambda ()
+                        (interactive)
+                        (speed-type-top-x 8000)))))
 
 (use-package verb
   :ensure t)
