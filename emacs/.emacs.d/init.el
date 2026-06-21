@@ -203,7 +203,9 @@
           help-mode
           compilation-mode
 	  occur-mode
-	  grep-mode))
+	  grep-mode
+          ;"\\*xref\\*.*"
+          xref--xref-buffer-mode))
   (popper-mode +1)
   (popper-echo-mode +1))
 
@@ -651,6 +653,17 @@
                                 :host "api.generativeai.google.com"
                                 :user "apikey"))
                         :stream t)))
+
+(use-package corfu
+  :ensure t
+  :custom
+  (corfu-cycle t)                ;; Enable cycling for candidates
+  (corfu-auto t)                 ;; Enable auto-completion
+  (corfu-auto-delay 0.2)         ;; Wait 0.2s before auto-completing
+  (corfu-auto-prefix 2)          ;; Trigger auto-completion after 2 characters
+  (corfu-quit-no-match t)        ;; Quit when no matches are found
+  :init
+  (global-corfu-mode))
 
 (with-eval-after-load 'project
   (defun project-find-regexp-with-unique-buffer (orig-fun &rest args)

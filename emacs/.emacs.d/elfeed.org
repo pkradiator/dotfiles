@@ -23,6 +23,7 @@
 **** https://www.lei.chat/posts/index.xml                  :gpu:compilers:
 **** https://blog.ezyang.com/feed.xml                      :torch:llm:
 **** https://chsasank.com/feed.xml                               :special:
+**** https://eli.thegreenplace.net/feeds/all.atom.xml
 **** Game                                                       :game:dev:
 ***** https://caseymuratori.com/blog_atom.rss
 *** Hacking                                              :cybersec:hacking:
