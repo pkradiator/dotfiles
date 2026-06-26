@@ -10,6 +10,7 @@
 **** https://johncarlosbaez.wordpress.com/feed/                  :physics:
 *** Dev                                                               :dev:
 **** https://web.navan.dev/feed.rss
+**** https://blog.aheymans.xyz/post/index.xml
 **** https://pointersgonewild.com/feed.xml
 **** https://eugene-andrienko.com/en/feed.xml
 **** https://scripter.co/atom.xml
