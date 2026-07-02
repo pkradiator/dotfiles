@@ -9,6 +9,7 @@
 **** https://math.andrej.com/feed.xml
 **** https://johncarlosbaez.wordpress.com/feed/                  :physics:
 *** Dev                                                               :dev:
+**** https://www.kapilsharma.dev/feed.xml
 **** https://coredumped.dev/index.xml
 **** https://web.navan.dev/feed.rss
 **** https://blog.aheymans.xyz/post/index.xml
