@@ -29,6 +29,8 @@
 **** https://eli.thegreenplace.net/feeds/all.atom.xml
 **** Game                                                       :game:dev:
 ***** https://caseymuratori.com/blog_atom.rss
+**** GPU                                                             :gpu:
+***** https://interplayoflight.wordpress.com/feed/
 *** Hacking                                              :cybersec:hacking:
 **** https://cocomelonc.github.io/feed.xml
 *** entry-title: \(linux\|linus\|ubuntu\|kde\|gnome\)               :linux:
