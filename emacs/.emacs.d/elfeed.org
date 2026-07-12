@@ -37,6 +37,7 @@
 *** entry-title: \(linux\|linus\|ubuntu\|kde\|gnome\)               :linux:
 *** Hardware                                                     :hardware:
 **** https://www.bunniestudios.com/blog/feed/
+**** https://sangota.substack.com/feed
 ** Youtube                                                         :youtube:
 *** Math                                                             :math:
 *** Dev                                                               :dev:
