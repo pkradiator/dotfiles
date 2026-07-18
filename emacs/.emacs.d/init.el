@@ -523,6 +523,8 @@
   :init
   (setq markdown-command "multimarkdown"
         markdown-fontify-code-blocks-natively t)
+  (setq markdown-unordered-list-item-prefix "  * ")
+  (add-hook 'markdown-mode-hook #'visual-line-mode)
   :bind (:map markdown-mode-map
          ("C-c C-e" . markdown-do)))
 
