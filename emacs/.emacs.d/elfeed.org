@@ -29,6 +29,7 @@
 **** https://chsasank.com/feed.xml                               :special:
 **** https://eli.thegreenplace.net/feeds/all.atom.xml
 **** https://andrewkelley.me/rss.xml
+**** https://despairlabs.com/blog/index.xml
 **** Game                                                       :game:dev:
 ***** https://caseymuratori.com/blog_atom.rss
 **** GPU                                                             :gpu:
