@@ -641,8 +641,13 @@
   :init
   (setq easy-hugo-basedir "~/kp7/mySite/"))
 
-(use-package cuda-mode
+(use-package zig-mode
   :ensure t)
+
+(use-package cmake-font-lock
+  :ensure t)
+
+(add-to-list 'auto-mode-alist '("\\.cuh?\\'" . c++-mode))
 
 (use-package gptel
   :ensure t
