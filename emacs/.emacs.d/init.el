@@ -28,11 +28,6 @@
 (require 'use-package)
 (setq use-package-always-defer 1)
 
-;; Garbage produced by Custom in a separate file
-(setq custom-file "~/.emacs.d/emacs-custom.el")
-(if (file-readable-p custom-file)
-    (load custom-file))
-
 ;; Add melpa
 (add-to-list 'package-archives 
 	     '("MELPA" .
@@ -42,6 +37,11 @@
 (toggle-frame-fullscreen)
 (when (eq system-type 'windows-nt)
   (add-to-list 'after-make-frame-functions 'toggle-frame-fullscreen))
+
+;; Garbage produced by Custom in a separate file
+(setq custom-file "~/.emacs.d/emacs-custom.el")
+(if (file-readable-p custom-file)
+    (load custom-file))
 
 (use-package which-key
   :ensure t
@@ -75,7 +75,6 @@
 (tool-bar-mode -1)
 (tooltip-mode -1)
 (set-fringe-mode 10)
-(setq tab-bar-tab-hints t)
 
 ;; Show column number on the modeline.
 (column-number-mode)
@@ -87,6 +86,7 @@
   :config
   (tab-bar-mode 1)
   (tab-bar-history-mode 1)
+  (setq tab-bar-tab-hints t)
 
   ;; Define the repeat map for tab history navigation
   (defvar tab-bar-history-repeat-map
@@ -102,7 +102,13 @@
   :bind
   (:map tab-bar-history-mode-map
         ("C-x w p" . tab-bar-history-back)
-        ("C-x w n" . tab-bar-history-forward)))
+        ("C-x w n" . tab-bar-history-forward))
+  (("C-x t g" . tab-bar-select-tab)))
+
+(use-package vc
+  :ensure nil
+  :init
+  (setq vc-find-revision-no-save t))
 
 (defun my/smart-next-line (&optional arg try-vscroll)
   "Move down. Uses logical lines if a prefix ARG is provided, else visual."
@@ -124,11 +130,32 @@
   :bind (("C-x c i" . change-inner)
          ("C-x c a" . change-outer)))
 
+(use-package tramp-rpc
+  :after tramp
+  :vc (:url "https://github.com/ArthurHeymans/emacs-tramp-rpc"
+       :rev :newest
+       :lisp-dir "lisp"))
+
+(defun my-icomplete-disable-on-tramp (orig-fun &rest args)
+  "Disable icomplete/fido if default-directory is a remote TRAMP path."
+  (let ((icomplete-mode (if (and (boundp 'icomplete-mode)
+                                 (or (and (boundp 'default-directory)
+                                          (file-remote-p default-directory))
+                                     (and (car args)
+                                          (stringp (car args))
+                                          (file-remote-p (car args)))))
+                            nil
+                          icomplete-mode)))
+    (apply orig-fun args)))
+
+(advice-add 'read-file-name :around #'my-icomplete-disable-on-tramp)
+
 (use-package icomplete
   :ensure nil
   :demand t
   :config
   (icomplete-vertical-mode t)
+  (setq icomplete-scroll t)
   (setq icomplete-show-matches-on-no-input t)
   (setq completion-styles '(substring initials flex))
   (setq completion-ignore-case t)
@@ -320,6 +347,7 @@
   :ensure t
   :config
   (add-to-list 'project-switch-commands '(ghostel-project "Ghostel" "s") t)
+  (add-to-list 'ghostel-tramp-shells '("rpc" login-shell))
   :bind
   (:map project-prefix-map
         ("s" . ghostel-project)
@@ -682,7 +710,10 @@
   (advice-add 'project-find-regexp :around
               #'project-find-regexp-with-unique-buffer))
 
+(put 'narrow-to-region 'disabled nil)
+
 
 (provide 'init)
 
 ;;; init.el ends here
+
