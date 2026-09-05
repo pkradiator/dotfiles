@@ -43,6 +43,8 @@
 (if (file-readable-p custom-file)
     (load custom-file))
 
+(setq confirm-kill-emacs 'y-or-n-p)
+
 (use-package which-key
   :ensure t
   :demand t
