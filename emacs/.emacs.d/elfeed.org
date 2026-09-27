@@ -36,6 +36,7 @@
 **** https://geohot.github.io/blog/feed.xml                     :tinygrad:
 **** https://gau-nernst.github.io/index.xml          :gpu:gpuOptimization:
 **** https://danielvegamyhre.github.io/feed.xml      :gpu:gpuOptimization:
+**** https://cudaforfun.substack.com/feed.xml        :gpu:gpuOptimization:
 **** Game                                                       :game:dev:
 ***** https://caseymuratori.com/blog_atom.rss
 **** GPU                                                             :gpu:
