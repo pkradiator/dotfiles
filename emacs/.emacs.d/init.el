@@ -678,6 +678,7 @@
   :ensure t)
 
 (add-to-list 'auto-mode-alist '("\\.cuh?\\'" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.hip\\'" . c++-mode))
 
 (use-package gptel
   :ensure t
