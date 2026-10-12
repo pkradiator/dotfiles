@@ -290,7 +290,12 @@
 
           ;; Resolutions — goals or habits
           ("r" "Resolution" entry (file+headline "~/kp7/org/life.org" "Resolutions")
-           "* TODO %?\n %U\n %i\n" :tag "resolution")))
+           "* TODO %?\n %U\n %i\n" :tag "resolution")
+          ("w" "Work log for a chosen date" entry
+               (file+olp+datetree "~/kp7/org/work.org")
+               "* %?\n"
+               :time-prompt t
+               :empty-lines 1)))
   (setq org-agenda-files '("~/kp7/org/life.org"))
 
   (setq org-agenda-custom-commands
