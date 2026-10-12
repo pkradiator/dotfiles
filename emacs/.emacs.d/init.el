@@ -1,4 +1,4 @@
-;;; Packages I have Installed
+;;; -*- lexical-binding: t; -*-
 ;; speed-type (installed manually)
 
 
