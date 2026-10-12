@@ -551,12 +551,20 @@
   :ensure t
   :mode ("README\\.md\\'" . gfm-mode)
   :init
-  (setq markdown-command "multimarkdown"
+  (setq markdown-command '("pandoc" "--from=markdown" "--to=html5")
         markdown-fontify-code-blocks-natively t)
   (setq markdown-unordered-list-item-prefix "  * ")
   (add-hook 'markdown-mode-hook #'visual-line-mode)
   :bind (:map markdown-mode-map
-         ("C-c C-e" . markdown-do)))
+              ("C-c C-e" . markdown-do)))
+
+(use-package pip-requirements
+  :ensure t)
+
+(use-package python
+  :ensure nil
+  :custom
+  (python-shell-dedicated 'project))
 
 (use-package diff-hl
   :ensure t
