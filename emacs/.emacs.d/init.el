@@ -162,6 +162,7 @@
   (setq completion-styles '(substring initials flex))
   (setq completion-ignore-case t)
   (setq read-file-name-completion-ignore-case t)
+  (setq read-buffer-completion-ignore-case t)
   (define-key icomplete-minibuffer-map (kbd "<tab>") 'icomplete-force-complete)
   (define-key icomplete-minibuffer-map (kbd "C-j") 'minibuffer-complete)
   (define-key icomplete-minibuffer-map (kbd "<S-return>") 'exit-minibuffer)
