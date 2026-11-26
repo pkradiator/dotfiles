@@ -40,6 +40,7 @@
 **** https://sebsite.pw/feed.xml
 **** https://wentao.site/posts/index.xml
 **** https://ykiko.me/en/index.xml                                   :cpp:
+**** https://danluu.com/atom.xml
 **** Game                                                       :game:dev:
 ***** https://caseymuratori.com/blog_atom.rss
 **** GPU                                                             :gpu:
